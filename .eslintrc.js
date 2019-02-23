@@ -8,6 +8,9 @@ module.exports = {
     'eslint:recommended',
     'plugin:vue/essential'
   ],
+  parserOptions: {
+    parser: "babel-eslint"
+  },
   globals: {
     "applicationCache": false,
     "atob": false,

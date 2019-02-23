@@ -32,6 +32,6 @@
     text-align: center;
     color: $color;
     font-size: $fontSize;
-    @include ellipsis();
+    @include ellipsis;
   }
 }

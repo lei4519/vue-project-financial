@@ -1,15 +1,21 @@
 <template>
-  <h1>hello</h1>
+  <div>
+    <headerVue/>
+    <router-view/>
+    <!-- <footerVue/> -->
+    <!-- <navBarVue/> -->
+  </div>
 </template>
 
 <script>
+import headerVue from 'common/header'
+// import footerVue from 'common/footer'
+// import navBarVue from 'common/navBar'
 export default {
-
+  components: {
+    headerVue
+    // footerVue,
+    // navBarVue
+  }
 }
 </script>
-
-<style lang="scss" scoped>
-h1 {
-  color: #f40;
-}
-</style>
