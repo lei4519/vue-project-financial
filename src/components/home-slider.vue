@@ -1,7 +1,7 @@
 <template>
-  <article :class="$style.container">
-    <Slider :items="items" :cname="$style.homeSlider"></Slider>
-    <section :class="$style.list">
+  <article class="container">
+    <Slider :items="items" class="sliderStyle"></Slider>
+    <section class="list">
       <div class="item" v-for="item in enters" :key="item.img">
         <router-link :to="{name: item.href}">
           <img :src="item.img" alt="item.title">
@@ -61,16 +61,23 @@ export default {
       ]
     }
   },
+  methods: {
+    fetchData() {
+      return this.$store.dispatch('fetchHomeData')
+    }
+  },
+  computed: {
+    swiper() {
+      return this.$store.getters.swiper
+    }
+  },
   components: {
     Slider
-  },
-  mounted() {
-    console.log(this.$style.homeSlider)
   }
 }
 </script>
 
-<style lang="scss" module>
+<style lang="scss" scoped>
 @import "style/element.scss";
 .container {
   position: absolute;
@@ -81,15 +88,43 @@ export default {
 }
 .list {
   @include list(row);
+  background-color: #fff;
   font-size: 26px;
-  img {
-    width: 90px;
-    height: 90px;
+  padding-top: 40px;
+  justify-content: space-around;
+  .item {
+    text-align: center;
+    a {
+      text-decoration: none;
+    }
+    img {
+      width: 90px;
+      height: 90px;
+    }
+    p {
+      font-size: 26px;
+      color: #666;
+      margin-top: 12px;
+    }
   }
 }
-.homeSlider{
-  img{
+.sliderStyle {
+  & /deep/ img {
     width: 100%;
+  }
+  & /deep/ .swiper-pagination-bullet {
+    width: 14px;
+    height: 14px;
+    opacity: 0.5;
+    background: url(//m.jr.jd.com/spe/qyy/main/images/banner_point_cur.png)
+      center center;
+    background-size: 14px 14px;
+    margin: 0 5px;
+    &.swiper-pagination-bullet-active {
+      opacity: 1;
+      background: url(//m.jr.jd.com/spe/qyy/main/images/banner_point_cur.png)
+        center center;
+    }
   }
 }
 </style>

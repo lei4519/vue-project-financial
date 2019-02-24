@@ -23,15 +23,11 @@ export default context => {
         return reject({ code: 404 })
       }
       
-      Promise.all(matchedComponents.map(({ asyncData }) => asyncData && asyncData({
-        store,
-        route: router.currentRoute
-      }))).then(() => {
+      context.rendered = () => {
         isDev && console.log(`data pre-fetch: ${Date.now() - s}ms`)
-        
         context.state = store.state
-        resolve(app)
-      }).catch(reject)
+      }
+      resolve(app)
     }, reject)
   })
 }

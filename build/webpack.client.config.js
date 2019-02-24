@@ -4,10 +4,13 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const base = require('./webpack.base.config')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
-
 let isDev = process.env.NODE_ENV === 'development'
-
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 let config = {}
+const entry = [
+  resolve('../src/viewport.js'),
+  resolve('../src/client-entry.js')
+]
 let defaultPlugin = [
   new webpack.DefinePlugin({
     'process.env.NODE_ENV': isDev ? '"development"' : '"production"',
@@ -18,8 +21,11 @@ let defaultPlugin = [
 
 if (isDev) {
   config = merge(base, {
-    entry: {
-      app: resolve('../src/client-entry.js')
+    entry,
+    output: {
+      path: resolve('../dist'),
+      publicPath: '/',
+      filename: '[name].[hash].js'
     },
     devServer: {
       historyApiFallback: true,
@@ -31,14 +37,15 @@ if (isDev) {
     },
     plugins: defaultPlugin.concat([
       new webpack.NamedModulesPlugin(),
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new HtmlWebpackPlugin({
+        template: resolve('../src/index.template.html')
+      })
     ])
   })
 } else {
   config = merge(base, {
-    entry: {
-      app: resolve('../src/client-entry.js')
-    },
+    entry,
     plugins: defaultPlugin,
     optimization: {
       splitChunks: {
