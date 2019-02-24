@@ -1,13 +1,13 @@
 const fs = require('fs')
 const path = require('path')
+const resolve = file => path.resolve(__dirname, file)
 const MFS = require('memory-fs')
 const {createBundleRenderer} = require('vue-server-renderer')
 const LRU = require('lru-cache')
 const webpack = require('webpack')
 const chokidar = require('chokidar')
-const clientConfig = require('./webpack.client.config')
-const serverConfig = require('./webpack.server.config')
-const resolve = file => path.resolve(__dirname, file)
+const clientConfig = require('../../build/webpack.client.config')
+const serverConfig = require('../../build/webpack.server.config')
 const templatePath = resolve('../../src/index.template.html')
 const serverRender = require('./server-render')
 
@@ -98,7 +98,7 @@ const createRenderer = (bundle, options) => {
 }
 
 let renderer
-module.exports = async (app) => {
+module.exports = (app) => {
   let promise = devServer(app, (bundle, options) => {
     renderer = createRenderer(bundle, options)
   })

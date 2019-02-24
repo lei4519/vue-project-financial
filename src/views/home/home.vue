@@ -1,15 +1,15 @@
 <template>
-  <article>asdlkfjl;asdfklasdjf
-    <!-- <home-slider></home-slider> -->
+  <article>
+    <home-slider></home-slider>
   </article>
 </template>
 
 <script>
-// import homeSlider from 'components/home-slider.vue'
+import homeSlider from 'components/home-slider.vue'
 
 export default {
   components: {
-    // homeSlider
+    homeSlider
   }
 }
 </script>

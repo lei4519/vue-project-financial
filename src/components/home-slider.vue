@@ -1,6 +1,6 @@
 <template>
   <article :class="$style.container">
-    <Slider></Slider>
+    <Slider :items="items" :cname="$style.homeSlider"></Slider>
     <section :class="$style.list">
       <div class="item" v-for="item in enters" :key="item.img">
         <router-link :to="{name: item.href}">
@@ -18,7 +18,20 @@ import Slider from 'core/slider.vue'
 export default {
   data() {
     return {
-      items: [],
+      items: [
+        {
+          src: '//img12.360buyimg.com/jrpmobile/jfs/t1/23009/6/7431/46179/5c6bdcfeEec7d3241/73b35d695302db25.jpg?width=750&height=320'
+        },
+        {
+          src: '//img12.360buyimg.com/jrpmobile/jfs/t1/27314/20/7438/69592/5c6bdd9aE70b97c46/4577bc3d8b1887bc.jpg?width=750&height=320'
+        },
+        {
+          src: '//img12.360buyimg.com/jrpmobile/jfs/t1/17896/17/7539/139307/5c6bdddaE61e3bc62/4cc519acb4470e0b.jpg?width=750&height=320'
+        },
+        {
+          src: '//img12.360buyimg.com/jrpmobile/jfs/t1/25557/18/7321/49244/5c6bdeddE08817e85/fa7feecb5fdc7e9b.jpg?width=750&height=320'
+        }
+      ],
       enters: [
         {
           img: '//img12.360buyimg.com/jrpmobile/jfs/t3991/64/2521945388/12110/93c0139/58d1e462Ncf294123.png?width=132&height=132',
@@ -50,6 +63,9 @@ export default {
   },
   components: {
     Slider
+  },
+  mounted() {
+    console.log(this.$style.homeSlider)
   }
 }
 </script>
@@ -69,6 +85,11 @@ export default {
   img {
     width: 90px;
     height: 90px;
+  }
+}
+.homeSlider{
+  img{
+    width: 100%;
   }
 }
 </style>

@@ -1,19 +1,29 @@
-<template>
-  <section :class="cname">
-    <swiper :options="options" :not-next-tick="options.notNextTick">
-      <swiper-slide v-for="item in items" :key="item.href">
-        <router-link :to="{name: item.href}">
-          <img :src="item.src">
-        </router-link>
-      </swiper-slide>
-      <div class="swiper-pagination" v-if="options.pagination"></div>
-    </swiper>
+<!-- <template>
+  <section :class="cname" class="wrapererr">
+    <div v-swiper:mySwiper="options">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="item in items" :key="item.src">
+          <router-link to="/">
+            <img :src="item.src">
+          </router-link>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
   </section>
+</template> -->
+<template>
+  <div v-swiper:mySwiper="options" class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" v-for="item in items"  :key="item.src">
+        <img :src="item.src">
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
 </template>
-
 <script>
 /* eslint-disable */
-import { swiper, swiperSlider } from 'vue-awesome-swiper'
 export default {
   props: {
     options: {
@@ -24,8 +34,7 @@ export default {
           loop: true,
           pagination: {
             el: '.swiper-pagination'
-          },
-          notNextTick: false
+          }
         }
       }
     },
@@ -40,9 +49,8 @@ export default {
       default: ''
     }
   },
-  components: {
-    swiper,
-    swiperSlider
+  mounted() {
+    console.log(this.mySwiper);
   }
 }
 </script>

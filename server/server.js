@@ -21,8 +21,8 @@ if (isProd) {
   handleSSR = require('./route/ssr')
 } else {
   handleSSR = require('./route/dev-ssr')(app)
+  console.log(handleSSR);
 }
-
 app.get('*', handleSSR)
 
 const port = process.env.PORT || 8080
